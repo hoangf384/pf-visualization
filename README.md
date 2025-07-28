@@ -60,6 +60,3 @@ Sau quá trình thực hiện và tham khảo các nguồn tài liệu, em nhậ
 Do thời gian thực hiện có hạn, em chỉ có thể hoàn thành đến mức hiện tại. Tuy chưa thật sự hoàn hảo nhưng em tin rằng nhóm đã giải quyết được các vấn đề cốt lõi của chủ đề đã chọn.  
 
 **Em xin tự đánh giá: 9.5/10**.
----
-
- 
