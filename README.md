@@ -54,9 +54,3 @@ Sau quá trình thực hiện và tham khảo các nguồn tài liệu, em nhậ
   - Nên bổ sung thêm các chú thích (comments) để người đọc dễ hiểu.
   - Thiếu phần tóm tắt ngắn gọn ngay dưới notebook.
 
-- **Ở phần Dashboard**:
-  - Một số biểu đồ chưa chuyển hệ định dạng từ "number" sang "currency".
-
-Do thời gian thực hiện có hạn, em chỉ có thể hoàn thành đến mức hiện tại. Tuy chưa thật sự hoàn hảo nhưng em tin rằng nhóm đã giải quyết được các vấn đề cốt lõi của chủ đề đã chọn.  
-
-**Em xin tự đánh giá: 9.5/10**.
