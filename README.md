@@ -47,10 +47,9 @@ Sau khi hoàn thành project, người đọc sẽ:
 
 ### Tự đánh giá
 
-Sau quá trình thực hiện và tham khảo các nguồn tài liệu, em nhận thấy vẫn còn nhiều điểm có thể cải thiện:
+Sau quá trình thực hiện và tham khảo các nguồn tài liệu, tôi nhận thấy vẫn còn nhiều điểm có thể cải thiện:
 
 - **Ở các file Notebooks**:
   - Cần trình bày gọn gàng và rõ ràng hơn.
   - Nên bổ sung thêm các chú thích (comments) để người đọc dễ hiểu.
   - Thiếu phần tóm tắt ngắn gọn ngay dưới notebook.
-
