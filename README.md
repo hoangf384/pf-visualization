@@ -1,19 +1,19 @@
-# Bài Tập Nhóm Cuối Kỳ – Dashboard Phân Tích Tài Chính Cá Nhân (Nhóm 10)
+# 💰 Personal Finance Dashboard (Tableau)
 ---
 ```
 nhom_10
 
 ├── Bao_cao/
 │   ├── BaoCao_Nhom_10.pdf
-│   └── BaoCao_phu_Nhom_10.pdf                          # Mô tả những gì đã thay đổi ở dữ liệu {[1] financial-literacy-data.csv}              
+│   └── BaoCao_phu_Nhom_10.pdf                                        
 │
 ├── Notebooks/
-│   ├── Datacleaned_Nhom_10.ipynb                       # Clean dữ liệu
-│   └── Synthetic_data_generation.ipynb                 # Sinh dữ liệu
+│   ├── Datacleaned_Nhom_10.ipynb                       
+│   └── Synthetic_data_generation.ipynb                 
 │
 ├── Dashboards/
-│   ├── Income Spending and Saving Overview.twbx        # Toàn cảnh về thu chi
-│   └── Actual Spending Behavior Analysis.twbx          # Tập trung vào cá nhân
+│   ├── Income Spending and Saving Overview.twbx       
+│   └── Actual Spending Behavior Analysis.twbx          
 │
 ├── Data/
 │   ├── synthetic_data_output.csv
@@ -23,33 +23,77 @@ nhom_10
 ```
 ---
 
-### Giới thiệu
 
-Để hiểu được toàn bộ project, người đọc nên theo thứ tự sau:
 
-1. **BaoCao_phu_Nhom_10.pdf** – Giải thích cách điều chỉnh và sinh dữ liệu.
-2. **Synthetic_data_generation.ipynb** – Chi tiết quá trình sinh dữ liệu tổng hợp.
-3. **BaoCao_Nhom_10.pdf** – Bài báo cáo chính, tổng hợp toàn bộ quy trình và kết quả.
-4. **Income Spending and Saving Overview.twbx** – Dashboard thể hiện toàn cảnh về thu nhập, chi tiêu, tiết kiệm.
-5. **Actual Spending Behavior Analysis.twbx** – Dashboard phân tích chi tiết hành vi chi tiêu cá nhân.
+## 🗂️ Project Overview
+This project analyzes **synthetic personal finance data** to understand patterns in income, spending, and saving across different demographic groups and over time.  
+It includes both the **data generation process** and the **data visualization stage** using Tableau.
 
----
+To fully understand the project, please follow this order:
 
-### Nội dung rút ra
-
-Sau khi hoàn thành project, người đọc sẽ:
-
-- Có cái nhìn tổng quan về chi tiêu và tiết kiệm cá nhân trong những năm gần đây, đặc biệt là hậu đại dịch COVID-19.
-- Hiểu rõ hơn về các yếu tố tác động đến hành vi chi tiêu.
-- Rút ra được những gợi ý hữu ích trong việc lên kế hoạch tiết kiệm và quản lý tài chính cá nhân một cách hiệu quả trong thời đại hiện nay.
+1. **BaoCao_phu_Nhom_10.pdf** – Explains how the dataset was adjusted and generated.  
+2. **Synthetic_data_generation.ipynb** – Jupyter Notebook describing the synthetic data generation process (sampling, noise, validation).  
+3. **BaoCao_Nhom_10.pdf** – Main analytical report summarizing workflow, dashboard design, and insights.  
+4. **Income Spending and Saving Overview.twbx** – Tableau dashboard visualizing population-level financial behavior.  
+5. **Actual Spending Behavior Analysis.twbx** – Tableau dashboard analyzing individual spending and saving patterns.
 
 ---
 
-### Tự đánh giá
+## 📖 Context
+The project simulates **financial literacy and personal finance behaviors** to:
+- Identify demographic differences in income and saving potential.  
+- Detect inefficient spending patterns and provide improvement suggestions.  
+- Demonstrate how **data-driven visualization** can support financial decision-making.
 
-Sau quá trình thực hiện và tham khảo các nguồn tài liệu, tôi nhận thấy vẫn còn nhiều điểm có thể cải thiện:
+---
 
-- **Ở các file Notebooks**:
-  - Cần trình bày gọn gàng và rõ ràng hơn.
-  - Nên bổ sung thêm các chú thích (comments) để người đọc dễ hiểu.
-  - Thiếu phần tóm tắt ngắn gọn ngay dưới notebook.
+## 🧩 Methodology (STAR Framework)
+### 🟢 Situation
+Analyzed two synthetic datasets representing population-level and individual financial activities.
+
+### 🟡 Task
+Build interactive Tableau dashboards to visualize saving and spending patterns, and deliver actionable insights.
+
+### 🔵 Action
+- Generated and validated synthetic data using Python.  
+- Cleaned and structured datasets (20K and 1.5K rows).  
+- Built dashboards with KPI cards, heatmaps, and trend analyses in Tableau.  
+- Compared demographic-level and personal-level insights to identify behavioral patterns.
+
+### 🟣 Result
+- Created **two interactive dashboards** summarizing key metrics:  
+  - Average income: **$74,503**, spending: **$66,196**, saving: **$8,307 (11%)**.  
+  - Identified **Transport & Insurance** as major expense drivers.  
+  - Non-essential expenses made up **58% of total spending** in personal data.  
+- Proposed strategies for improving saving habits and optimizing spending categories.
+
+---
+
+## 🧠 Key Insights
+| Category | Observation | Implication |
+|-----------|--------------|--------------|
+| **Age 18–25** | Lowest saving rate | Need for early financial education |
+| **Transport & Insurance** | Top spending categories | Potential for optimization |
+| **Non-essential spending (58%)** | Exceeds income growth | Encourage automated budgeting |
+
+---
+
+## 📊 Dashboards
+- [📈 Demographic Overview](https://public.tableau.com/app/profile/nguy.n.phan.ho.ng.ph.c/viz/Book1_17516920190310/General?publish=yes)  
+- [💸 Spending Behavior Analysis](https://public.tableau.com/app/profile/nguyen.nhi8170/viz/CuoiKy_17519870918010/Dashboard1?publish=yes)
+
+---
+
+## 🛠️ Tools & Skills
+- **Python (Pandas, NumPy)** – Synthetic data generation  
+- **Tableau** – Dashboard design, KPI visualization  
+- **Excel / Google Sheets** – Data cleaning and validation  
+- **Data Storytelling** – Insight communication and report writing
+
+---
+
+## 🖼️ Screenshots
+![Dashboard Overview](./assets/dashboard1.png)
+![Spending Behavior](./assets/dashboard2.png)
+
+---
