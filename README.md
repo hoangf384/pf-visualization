@@ -1,151 +1,145 @@
 # Personal Finance Dashboard (Tableau)
 
+[Đọc bằng Tiếng Việt](README.vi.md)
+
 ## Table of Contents
-- [Project Overview](#project-overview)
-- [Key Learnings](#key-learnings)
-- [Context](#context)
-- [Methodology (STAR Framework)](#methodology-star-framework)
-- [Key Insights](#key-insights)
-- [Tools & Skills](#tools--skills)
-- [Future Developments](#future-developments)
-- [Getting Started](#getting-started)
-  - [How to Clone the Project](#how-to-clone-the-project)
-  - [How to Install the Project](#how-to-install-the-project)
+- [What is this project?](#what-is-this-project)
+- [What did I learn?](#what-did-i-learn)
+- [Key findings from the data](#key-findings-from-the-data)
+- [Proposed improvement](#proposed-improvement)
+- [Tools used](#tools-used)
+- [What's next?](#whats-next)
+- [How to run the project](#how-to-run-the-project)
 - [Screenshots](#screenshots)
 
 ---
 
-## Project Overview
+## What is this project?
 
-[README in Vietnamese](README.vi.md)
+This project analyzes personal finance behavior — income, spending, and saving — broken down by age group.
 
-This project analyzes synthetic personal finance data to understand patterns in income, spending, and saving across different demographic groups and over time. It includes both the data generation process and the data visualization stage using Tableau.
+Since real user data wasn't available, I **built a synthetic dataset of 20,000 rows** using Python, modeled after real statistics from the U.S. Bureau of Labor Statistics ([bls.gov](https://www.bls.gov/cex/tables.htm)). The data was then visualized using Tableau.
 
-To fully understand the project, please follow this order:
+To follow the project end-to-end:
 
-1. **BaoCao_phu_Nhom_10.pdf** - Explains how the dataset was adjusted and generated.
-2. **Synthetic_data_generation.ipynb** - Jupyter Notebook describing the synthetic data generation process (sampling, noise, validation).
-3. **BaoCao_Nhom_10.pdf** - Main analytical report summarizing workflow, dashboard design, and insights.
-4. **Income Spending and Saving Overview.twbx** - Tableau dashboard visualizing population-level financial behavior.
-5. **Actual Spending Behavior Analysis.twbx** - Tableau dashboard analyzing individual spending and saving patterns.
+1. **BaoCao_phu_Nhom_10.pdf** — How the dataset was built.
+2. **Synthetic_data_generation.ipynb** — Python code for data generation.
+3. **BaoCao_Nhom_10.pdf** — Main analytical report.
+4. **Income Spending and Saving Overview.twbx** — Population-level dashboard.
+5. **Actual Spending Behavior Analysis.twbx** — Individual-level dashboard.
 
-Repository structure:
 ```text
-nhom_10
-├── Reports/
-│   ├── main_report.pdf 
-│   └── other_report.pdf
-│
-├── Notebooks/
-│   ├── Datacleaned_Nhom_10.ipynb
-│   └── Synthetic_data_generation.ipynb
-│
-├── Dashboards/
-│   ├── Income Spending and Saving Overview.twbx
-│   └── Actual Spending Behavior Analysis.twbx
-│
-└── Data/
-    ├── synthetic_data_output.csv
-    ├── [1] Personal_Finance_Dataset.csv
-    ├── [1] financial-literacy-data.csv
-    └── reference-person-age-ranges-2023.xlsx
+pf-visualization/
+├── Reports/         ← PDF reports
+├── Notebooks/       ← Python notebooks
+├── Dashboards/      ← Tableau files (.twbx)
+└── Data/            ← CSV data files
 ```
 
-## Key Learnings
+---
 
-- **End-to-End Data Workflow:** Gained a comprehensive understanding of data generation, statistical noise addition, and data validation using Python.
-- **Data Visualization Expertise:** Developed advanced, interactive dashboards in Tableau to communicate complex financial metrics to diverse audiences.
-- **Behavioral Analysis:** Enhanced analytical capabilities by identifying and breaking down demographic spending patterns to extract actionable insights.
-- **Business Communication:** Improved skills in data storytelling through the creation of detailed, structured analytical reports.
+## What did I learn?
 
-## Context
+- **Synthetic data generation:** How to use Python (Pandas, NumPy) to create realistic fake data with proper statistical distributions — useful when real data isn't available.
+- **Tableau:** Built two interactive dashboards from scratch — KPI cards, filters, trend charts.
+- **Segmented analysis:** How to read numbers by demographic groups (age, occupation, city tier) to find meaningful patterns, not just averages.
+- **Data storytelling:** Turning a CSV into a clear narrative with actionable conclusions.
 
-The project simulates financial literacy and personal finance behaviors to:
-- Identify demographic differences in income and saving potential.
-- Detect inefficient spending patterns and provide improvement suggestions.
-- Demonstrate how data-driven visualization can support financial decision-making.
+---
 
-## Methodology (STAR Framework)
+## Key findings from the data
 
-### Situation
-Analyzed two synthetic datasets representing population-level and individual financial activities.
+After running computational analysis (`analyze_pf.py`) on 20,000 rows:
 
-### Task
-Build interactive Tableau dashboards to visualize saving and spending patterns, and deliver actionable insights.
+| Age Group | Avg. Savings Rate | What this means |
+|-----------|------------------|-----------------|
+| 18–25 | **–26.9%** | Spending more than they earn |
+| 26–35 | +15.6% | Recovering — building stability |
+| 36–45 | **+28.7%** | Best savers in the dataset |
+| 46–55 | +1.9% | Near-zero — likely peak family expenses |
+| 56–65 | –86.6% | Drawing down savings (likely retired) |
 
-### Action
-- Generated and validated synthetic data using Python.
-- Cleaned and structured datasets (20K and 1.5K rows).
-- Built dashboards with KPI cards, heatmaps, and trend analyses in Tableau.
-- Compared demographic-level and personal-level insights to identify behavioral patterns.
+**Surprising finding:** Non-essential spending (dining out, entertainment, misc.) is only **~8%** of total spend — a much smaller share than expected.
 
-### Result
-- Created two interactive dashboards summarizing key metrics:
-  - Average income: $74,503, spending: $66,196, saving: $8,307 (11%).
-- Identified Transport & Insurance as major expense drivers.
-- Discovered that non-essential expenses made up 58% of total spending in the personal data dataset.
-- Proposed strategies for improving saving habits and optimizing spending categories.
+> **The real insight:** Young people (18–25) overspend not because of leisure, but because **fixed costs (rent, insurance, transport) already consume most of their income** before discretionary spending even begins.
 
-## Key Insights
+---
 
-| Category | Observation | Implication |
-|-----------|--------------|--------------|
-| **Age 18–25** | Lowest saving rate | Need for early financial education |
-| **Transport & Insurance** | Top spending categories | Potential for optimization |
-| **Non-essential spending (58%)** | Exceeds income growth | Encourage automated budgeting |
+## Proposed improvement
 
-## Tools & Skills
+Based on the data, here's a simple experiment I'd suggest to help users manage money better:
 
-- **Python (Pandas, NumPy)** - Synthetic data generation
-- **Tableau** - Dashboard design, KPI visualization
-- **Excel / Google Sheets** - Data cleaning and validation
-- **Data Storytelling** - Insight communication and report writing
+### A/B Test: Proactive spending alerts
 
-## Future Developments
+**The problem:** The 18–25 group is overspending (–26.9%), but the current dashboard only shows what happened after the month is over — too late to change behavior.
 
-- **Real-Time Data Integration:** Connect to personal finance APIs or actual bank exports to analyze live data.
-- **Predictive Analytics:** Implement machine learning models to forecast future expenses and estimate saving rates based on current trends.
-- **Enhanced Personalization:** Introduce customizable financial goal tracking components into the Tableau dashboards.
-- **Automated Data Pipelines:** Refactor the existing Python notebooks into a streamlined data pipeline using workflow orchestration tools.
+**The idea:**
 
-## Getting Started
+| | Group A (current) | Group B (test) |
+|---|---|---|
+| Experience | Review spending at end of month | Get an alert before going over budget |
+| Example | "You spent $2,000 this month" | "⚠️ You've used 90% of your income with 10 days left" |
 
-### How to Clone the Project
+**What I'd measure:** After 1 month, does Group B save more than Group A?
 
-Run the following command in your terminal to clone the repository to your local machine:
+**Why this approach makes sense:**
+The problem isn't lack of information — users know they're overspending. The problem is they find out **too late**. Switching from reactive reporting to proactive nudging addresses the actual root cause.
+
+---
+
+## Tools used
+
+| Tool | Purpose |
+|------|---------|
+| Python (Pandas, NumPy) | Data generation and cleaning |
+| Tableau | Dashboard design, KPI visualization |
+| Excel / Google Sheets | Data validation |
+
+---
+
+## What's next?
+
+- **Real data integration:** Replace synthetic data with actual bank or e-wallet exports.
+- **Spending forecasting:** Use a simple model to predict end-of-month balance based on current spending pace.
+- **Automation:** Turn the manual notebook workflow into a scheduled pipeline that updates the dashboard automatically.
+
+---
+
+## How to run the project
+
+### Clone the repo
 
 ```bash
 git clone https://github.com/hoangf384/pf-visualization.git
 cd pf-visualization
 ```
 
-### How to Install the Project
-
-Follow these steps to set up the development environment required for running the Python notebooks:
+### Set up the environment
 
 ```bash
-# 1. Create a virtual environment
+# Create a virtual environment
 python -m venv .venv
 
-# 2. Activate the virtual environment
-# On Windows:
-.venv\Scripts\activate
-# On macOS/Linux:
+# Activate it (macOS/Linux)
 source .venv/bin/activate
+# Activate it (Windows)
+.venv\Scripts\activate
 
-# 3. Install necessary Python libraries
+# Install dependencies
 pip install -r requirements.txt
 
-# 4. Register the virtual environment kernel with Jupyter
+# Register the kernel for Jupyter
 python -m ipykernel install --user --name=.venv --display-name "Python (.venv)"
 ```
 
-By completing the final step, you have successfully registered the new kernel. When you open any Jupyter Notebooks (`.ipynb`), be sure to select the `Python (.venv)` kernel to utilize the correctly isolated environment!
+Then open any `.ipynb` file in Jupyter and select the **Python (.venv)** kernel.
+
+---
 
 ## Screenshots
 
-![Dashboard Overview](images/demographic.png)
-[Demographic Overview](https://public.tableau.com/app/profile/nguy.n.phan.ho.ng.ph.c/viz/Book1_17516920190310/General?publish=yes)
+![Dashboard Overview](Images/demographic.png)
+[→ View General Dashboard on Tableau Public](https://public.tableau.com/app/profile/nguy.n.phan.ho.ng.ph.c/viz/Book1_17516920190310/General?publish=yes)
 
-![Spending Behavior](images/Behaviors.png)
-[Spending Behavior Analysis](https://public.tableau.com/app/profile/nguyen.nhi8170/viz/CuoiKy_17519870918010/Dashboard1?publish=yes)
+![Spending Behavior](Images/Behaviors.png)
+[→ View Spending Behavior Dashboard on Tableau Public](https://public.tableau.com/app/profile/nguyen.nhi8170/viz/CuoiKy_17519870918010/Dashboard1?publish=yes)

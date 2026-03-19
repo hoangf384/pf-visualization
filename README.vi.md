@@ -1,153 +1,145 @@
 # Bảng Điều Khiển Tài Chính Cá Nhân (Tableau)
 
-
+[Read in English](README.md)
 
 ## Mục Lục
-- [Tổng Quan Dự Án](#tổng-quan-dự-án)
-- [Những Bài Học Cốt Lõi](#những-bài-học-cốt-lõi)
-- [Bối Cảnh](#bối-cảnh)
-- [Phương Pháp Luận (Khung STAR)](#phương-pháp-luận-khung-star)
-- [Những Phát Hiện Chính](#những-phát-hiện-chính)
-- [Công Cụ & Kỹ Năng](#công-cụ--kỹ-năng)
-- [Hướng Phát Triển Tiếp Theo](#hướng-phát-triển-tiếp-theo)
-- [Bắt Đầu Dự Án](#bắt-đầu-dự-án)
-  - [Cách Clone Dự Án](#cách-clone-dự-án)
-  - [Cách Cài Đặt Dự Án](#cách-cài-đặt-dự-án)
-- [Ảnh Chụp Màn Hình](#ảnh-chụp-màn-hình)
+- [Dự án này là gì?](#dự-án-này-là-gì)
+- [T học được gì từ dự án này?](#t-học-được-gì-từ-dự-án-này)
+- [Phát hiện thú vị nhất từ dữ liệu](#phát-hiện-thú-vị-nhất-từ-dữ-liệu)
+- [Đề xuất cải tiến](#đề-xuất-cải-tiến)
+- [Công cụ sử dụng](#công-cụ-sử-dụng)
+- [Hướng phát triển tiếp theo](#hướng-phát-triển-tiếp-theo)
+- [Cách chạy dự án](#cách-chạy-dự-án)
+- [Ảnh chụp màn hình](#ảnh-chụp-màn-hình)
 
 ---
 
-## Tổng Quan Dự Án
-[Read in English](README.md)
+## Dự án này là gì?
 
-Dự án này phân tích các dữ liệu tài chính cá nhân mô phỏng nhằm tìm hiểu các xu hướng về thu nhập, chi tiêu và tiết kiệm ở các nhóm nhân khẩu học khác nhau theo thời gian. Dự án bao gồm cả quá trình tạo dữ liệu mô phỏng và giai đoạn trực quan hóa dữ liệu bằng Tableau.
+Dự án phân tích hành vi tài chính cá nhân — bao gồm thu nhập, chi tiêu, và tiết kiệm — theo từng nhóm tuổi.
 
-Để hiểu toàn bộ dự án, vui lòng tham khảo theo thứ tự sau:
+Vì không có dữ liệu thực từ người dùng, t tự **tạo ra bộ dữ liệu mô phỏng 20.000 dòng** bằng Python, dựa trên số liệu thống kê thực tế từ Bộ Lao động Mỹ ([bls.gov](https://www.bls.gov/cex/tables.htm)). Sau đó trực quan hóa bằng Tableau.
 
-1. **BaoCao_phu_Nhom_10.pdf** - Giải thích cách dữ liệu được điều chỉnh và tạo ra.
-2. **Synthetic_data_generation.ipynb** - Notebook mô tả quá trình tạo dữ liệu mô phỏng (lấy mẫu, thêm nhiễu, xác thực).
-3. **BaoCao_Nhom_10.pdf** - Báo cáo phân tích chính tổng hợp quy trình làm việc, thiết kế bảng điều khiển và các thông tin chi tiết.
-4. **Income Spending and Saving Overview.twbx** - Bảng điều khiển Tableau trực quan hóa hành vi tài chính ở cấp độ tổng thể dân số.
-5. **Actual Spending Behavior Analysis.twbx** - Bảng điều khiển Tableau phân tích chi tiết hành vi chi tiêu và tiết kiệm của cá nhân.
+Để hiểu toàn bộ dự án, xem theo thứ tự:
 
-Cấu trúc thư mục:
+1. **BaoCao_phu_Nhom_10.pdf** — Giải thích cách dữ liệu được tạo ra.
+2. **Synthetic_data_generation.ipynb** — Code Python tạo dữ liệu.
+3. **BaoCao_Nhom_10.pdf** — Báo cáo phân tích chính.
+4. **Income Spending and Saving Overview.twbx** — Dashboard tổng quan toàn dân số.
+5. **Actual Spending Behavior Analysis.twbx** — Dashboard phân tích chi tiết từng cá nhân.
+
 ```text
-nhom_10
-├── Reports/
-│   ├── main_report.pdf
-│   └── other_report.pdf
-│
-├── Notebooks/
-│   ├── Datacleaned_Nhom_10.ipynb
-│   └── Synthetic_data_generation.ipynb
-│
-├── Dashboards/
-│   ├── Income Spending and Saving Overview.twbx
-│   └── Actual Spending Behavior Analysis.twbx
-│
-└── Data/
-    ├── synthetic_data_output.csv
-    ├── [1] Personal_Finance_Dataset.csv
-    ├── [1] financial-literacy-data.csv
-    └── reference-person-age-ranges-2023.xlsx
+pf-visualization/
+├── Reports/         ← Báo cáo PDF
+├── Notebooks/       ← Code Python
+├── Dashboards/      ← File Tableau (.twbx)
+└── Data/            ← Dữ liệu CSV
 ```
 
-## Những Bài Học Cốt Lõi
+---
 
-- **Quy Trình Xử Lý Dữ Liệu Toàn Diện:** Có được sự hiểu biết sâu sắc về quá trình tạo lập, thêm nhiễu thống kê và kiểm tra xác thực dữ liệu mô phỏng thông qua Python.
-- **Kỹ Năng Trực Quan Hóa Cấp Cao:** Phát triển kỹ năng xây dựng bảng điều khiển có tính tương tác cao trên Tableau để truyền tải các chỉ số tài chính phức tạp đến với nhiều đối tượng người xem.
-- **Phân Tích Hành Vi:** Nâng cao tư duy phân tích thông qua việc xác định và mổ xẻ các khuôn mẫu chi tiêu dựa trên nhân khẩu học nhằm rút ra những kiến thức có tính ứng dụng thực tiễn.
-- **Giao Tiếp Trong Công Việc:** Cải thiện kỹ năng kể chuyện bằng dữ liệu (Data Storytelling) qua việc trình bày các báo cáo phân tích một cách có cấu trúc và chi tiết.
+## T học được gì từ dự án này?
 
-## Bối Cảnh
+- **Tạo dữ liệu mô phỏng (Synthetic Data):** Học cách dùng Python để tạo dữ liệu giả nhưng có phân phối và logic giống thực tế — rất hữu ích khi không có dữ liệu thật để phân tích.
+- **Tableau:** Từ không biết gì đến tự build được 2 dashboard có KPI, bộ lọc tương tác, và biểu đồ xu hướng.
+- **Đọc dữ liệu theo nhóm:** Học cách nhìn số theo từng phân khúc (tuổi, nghề nghiệp, khu vực) để tìm ra sự khác biệt có ý nghĩa.
+- **Kể chuyện bằng số:** Từ một đống CSV → báo cáo rõ ràng, có kết luận cụ thể.
 
-Dự án mô phỏng hiểu biết tài chính và hành vi tài chính cá nhân nhằm mục đích:
-- Xác định những khác biệt về nhân khẩu học trong tiềm năng thu nhập và tiết kiệm.
-- Phát hiện các kiểu chi tiêu kém hiệu quả và đưa ra gợi ý cải thiện.
-- Chứng minh cách trực quan hóa dựa trên dữ liệu có thể hỗ trợ việc ra quyết định tài chính.
+---
 
-## Phương Pháp Luận (Khung STAR)
+## Phát hiện thú vị nhất từ dữ liệu
 
-### Tình Huống (Situation)
-Cần phân tích hai tập dữ liệu mô phỏng đại diện cho hoạt động tài chính ở cấp độ tổng thể dân số và cấp độ cá nhân.
+Sau khi chạy phân tích (`analyze_pf.py`) trên 20.000 dòng dữ liệu, kết quả theo nhóm tuổi như sau:
 
-### Nhiệm Vụ (Task)
-Xây dựng các bảng điều khiển Tableau tương tác để trực quan hóa xu hướng chi tiêu - tiết kiệm, đồng thời cung cấp các kết luận có giá trị ứng dụng.
+| Nhóm tuổi | Tỷ lệ tiết kiệm trung bình | Ý nghĩa |
+|-----------|---------------------------|---------|
+| 18–25 | **–26.9%** | Đang tiêu nhiều hơn kiếm được |
+| 26–35 | +15.6% | Bắt đầu ổn định hơn |
+| 36–45 | **+28.7%** | Tiết kiệm tốt nhất |
+| 46–55 | +1.9% | Gần như không tiết kiệm — có thể đang nuôi con |
+| 56–65 | –86.6% | Đang rút tiền tích lũy (có thể đã về hưu) |
 
-### Hành Động (Action)
-- Tạo và xác thực dữ liệu mô phỏng bằng Python.
-- Xử lý sạch và định dạng cấu trúc dữ liệu (20.000 dòng và 1.500 dòng).
-- Thiết lập bảng điều khiển với các thẻ KPI, bản đồ nhiệt và phân tích xu hướng trên Tableau.
-- Đối chiếu những phát hiện ở cấp độ nhân khẩu học chung và cấp độ cá nhân để tìm ra các mô hình hành vi.
+**Điều bất ngờ:** Chi tiêu không thiết yếu (ăn ngoài, giải trí, linh tinh) chỉ chiếm **~8%** tổng chi tiêu — không phải nguyên nhân chính khiến nhóm 18–25 tiêu hết tiền.
 
-### Kết Quả (Result)
-- Tạo thành công hai bảng điều khiển tương tác tóm tắt các chỉ số chính:
-  - Thu nhập trung bình: 74.503 USD, Chi tiêu: 66.196 USD, Tiết kiệm: 8.307 USD (11%).
-- Xác định "Di chuyển & Bảo hiểm" (Transport & Insurance) là các nguồn chi phí lớn nhất.
-- Phát hiện chi tiêu không thiết yếu chiếm tới 58% tổng chi phí trong tập dữ liệu cá nhân.
-- Đề xuất các chiến lược để nâng cao thói quen tiết kiệm và tối ưu hóa các khoản mục chi tiêu.
+> **Kết luận thực sự:** Nhóm trẻ tiêu vượt thu nhập là vì **thu nhập còn thấp trong khi chi phí cố định (thuê nhà, bảo hiểm, đi lại) đã rất cao** — không phải vì họ đi ăn nhiều hay mua sắm nhiều.
 
-## Những Phát Hiện Chính
+---
 
-| Hạng Mục | Quan Sát | Ý Nghĩa Thực Tiễn |
-|-----------|--------------|--------------|
-| **Độ Tuổi 18–25** | Tỷ lệ tiết kiệm thấp nhất | Cần sớm được giáo dục về tài chính |
-| **Di Chuyển & Bảo Hiểm** | Dẫn đầu các danh mục chi tiêu | Có tiềm năng tối ưu hóa để tiết kiệm |
-| **Chi Tiêu Không Thiết Yếu (58%)** | Tăng trưởng nhanh hơn thu nhập | Cần khuyến khích ngân sách tự động |
+## Đề xuất cải tiến
 
-## Công Cụ & Kỹ Năng
+Dựa trên kết quả phân tích, nếu muốn giúp người dùng quản lý tiền tốt hơn, t đề xuất thử nghiệm tính năng sau:
 
-- **Python (Pandas, NumPy)** - Phương pháp tạo dữ liệu mô phỏng
-- **Tableau** - Thiết kế bảng điều khiển, trực quan hóa KPI
-- **Excel / Google Sheets** - Xử lý dọn dẹp và xác thực dữ liệu
-- **Data Storytelling** - Truyền đạt thông tin chi tiết và viết báo cáo
+### Thử nghiệm A/B: Cảnh báo chi tiêu thông minh
 
-## Hướng Phát Triển Tiếp Theo
+**Vấn đề cần giải quyết:** Nhóm 18–25 đang tiêu nhiều hơn kiếm (–26.9%), nhưng dashboard hiện tại chỉ hiển thị số liệu sau khi đã tiêu xong — quá muộn để thay đổi hành vi.
 
-- **Tích Hợp Dữ Liệu Theo Thời Gian Thực:** Kết nối vào các API tài chính cá nhân hoặc xuất tệp từ ngân hàng để phân tích dữ liệu sống.
-- **Phân Tích Dự Đoán:** Ứng dụng mô hình học máy (Machine Learning) để dự đoán chi tiêu trong tương lai và ước lượng tỷ lệ tiết kiệm dựa theo xu hướng hiện tại.
-- **Tăng Cường Tính Cá Nhân Hóa:** Thêm vào bảng điều khiển Tableau các phần tùy chỉnh cho từng mục tiêu tài chính cụ thể.
-- **Tự Động Hóa Xử Lý Dữ Liệu:** Cải tiến lại các file Python sang một luồng dữ liệu (Data Pipeline) tự động thông qua các công cụ lên lịch quy trình làm việc.
+**Ý tưởng test:**
 
-## Bắt Đầu Dự Án
+| | Nhóm A (hiện tại) | Nhóm B (thử nghiệm) |
+|---|---|---|
+| Trải nghiệm | Xem lại số liệu cuối tháng | Nhận cảnh báo ngay khi chi tiêu sắp vượt thu nhập |
+| Ví dụ | "Tháng này bạn đã tiêu 8 triệu" | "⚠️ Bạn đã tiêu 90% thu nhập, còn 10 ngày nữa mới đến tháng sau" |
 
-### Cách Clone Dự Án
+**Muốn đo lường gì:** Sau 1 tháng, nhóm B có tiết kiệm được nhiều hơn nhóm A không?
 
-Khởi chạy lệnh sau trong terminal của bạn để sao chép (clone) kho lưu trữ mã nguồn này về máy:
+**Tại sao cách này đúng hướng:**
+Vấn đề không phải thiếu thông tin — người dùng biết họ đang tiêu nhiều. Vấn đề là họ nhận ra **quá muộn**. Cảnh báo sớm (proactive) thay vì báo cáo sau (reactive) mới là can thiệp đúng chỗ.
+
+---
+
+## Công cụ sử dụng
+
+| Công cụ | Dùng để làm gì |
+|---------|---------------|
+| Python (Pandas, NumPy) | Tạo và làm sạch dữ liệu mô phỏng |
+| Tableau | Vẽ dashboard, KPI, biểu đồ |
+| Excel / Google Sheets | Kiểm tra và xác thực dữ liệu |
+
+---
+
+## Hướng phát triển tiếp theo
+
+- **Kết nối dữ liệu thật:** Thay dữ liệu mô phỏng bằng export từ app ngân hàng hoặc ví điện tử.
+- **Dự báo chi tiêu:** Dùng machine learning để dự đoán tháng này sẽ tiêu bao nhiêu dựa trên lịch sử.
+- **Tự động hóa:** Thay vì chạy notebook thủ công, build pipeline tự động cập nhật dashboard mỗi tuần.
+
+---
+
+## Cách chạy dự án
+
+### Clone về máy
 
 ```bash
 git clone https://github.com/hoangf384/pf-visualization.git
 cd pf-visualization
 ```
-*(Thay thế `hoangf384/pf-visualization` bằng URL chính xác của dự án nếu cần).*
 
-### Cách Cài Đặt Dự Án
-
-Thực hiện các bước sau để thiết lập môi trường phát triển cần thiết, dùng cho việc khởi chạy các Notebook Python:
+### Cài đặt môi trường
 
 ```bash
-# 1. Tạo môi trường ảo (virtual environment)
+# Tạo môi trường ảo
 python -m venv .venv
 
-# 2. Kích hoạt môi trường ảo
-# Đối với Windows:
-.venv\Scripts\activate
-# Đối với macOS/Linux:
+# Kích hoạt (macOS/Linux)
 source .venv/bin/activate
+# Kích hoạt (Windows)
+.venv\Scripts\activate
 
-# 3. Cài đặt các thư viện Python bổ trợ
+# Cài thư viện
 pip install -r requirements.txt
 
-# 4. Đăng ký kernel Python của môi trường ảo vào Jupyter
+# Đăng ký kernel để chạy trong Jupyter
 python -m ipykernel install --user --name=.venv --display-name "Python (.venv)"
 ```
 
-Khi bạn đã hoàn thành bước thứ tư, kernel tùy chỉnh này đã được thiết lập. Mỗi khi mở Jupyter Notebook (`.ipynb`), hãy chọn tới kernel `Python (.venv)` để có thể chạy các thư viện trong một môi trường được cô lập hoàn toàn.
+Sau đó mở file `.ipynb` trong Jupyter và chọn kernel **Python (.venv)**.
 
-## Ảnh Chụp Màn Hình
+---
 
-![Tổng Quan Nhóm Nhân Khẩu Học](images/demographic.png)  
-[Xem Bảng Điều Khiển Tổng Quan](https://public.tableau.com/app/profile/nguy.n.phan.ho.ng.ph.c/viz/Book1_17516920190310/General?publish=yes)
+## Ảnh chụp màn hình
 
-![Hành Vi Chi Tiêu](images/Behaviors.png)  
-[Xem Phân Tích Hành Vi Chi Tiêu](https://public.tableau.com/app/profile/nguyen.nhi8170/viz/CuoiKy_17519870918010/Dashboard1?publish=yes)
+![Tổng Quan Nhóm Nhân Khẩu Học](Images/demographic.png)
+[→ Xem Dashboard Tổng Quan trên Tableau Public](https://public.tableau.com/app/profile/nguy.n.phan.ho.ng.ph.c/viz/Book1_17516920190310/General?publish=yes)
+
+![Hành Vi Chi Tiêu](Images/Behaviors.png)
+[→ Xem Dashboard Hành Vi Chi Tiêu trên Tableau Public](https://public.tableau.com/app/profile/nguyen.nhi8170/viz/CuoiKy_17519870918010/Dashboard1?publish=yes)
