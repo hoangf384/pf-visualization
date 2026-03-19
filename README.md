@@ -1,89 +1,76 @@
-# Personal Finance Dashboard (Tableau)
+# FinTech Personal Finance Analysis (Tableau)
 
 [Đọc bằng Tiếng Việt](README.vi.md)
 
 ## Table of Contents
-- [What is this project?](#what-is-this-project)
-- [What did I learn?](#what-did-i-learn)
-- [Key findings from the data](#key-findings-from-the-data)
-- [Proposed improvement](#proposed-improvement)
+- [Project Context](#project-context)
+- [How we simulated the data](#how-we-simulated-the-data)
+- [Key findings & Business Value](#key-findings--business-value)
+- [Proposed Feature & A/B Test](#proposed-feature--ab-test)
 - [Tools used](#tools-used)
-- [What's next?](#whats-next)
 - [How to run the project](#how-to-run-the-project)
-- [Screenshots](#screenshots)
+- [Dashboard](#dashboard)
 
 ---
 
-## What is this project?
+## Project Context
+**Scenario:** Imagine working as a Data Analyst for a major US Digital Bank or FinTech app (similar to Chime, Mint, or a digital wallet). The **Product Team** wants to revamp the app's "Personal Financial Management (PFM)" feature to actually help users rather than just passively categorizing their past transactions.
 
-This project analyzes personal finance behavior — income, spending, and saving — broken down by age group.
+To understand our user demographics and their pain points, we needed data. However, our initial user surveys lacked the volume needed for robust segmentation. To solve this, **we generated a highly realistic synthetic dataset of 20,000 users** modeled after real U.S. macroeconomic statistics. 
 
-Since real user data wasn't available, I **built a synthetic dataset of 20,000 rows** using Python, modeled after real statistics from the U.S. Bureau of Labor Statistics ([bls.gov](https://www.bls.gov/cex/tables.htm)). The data was then visualized using Tableau.
-
-To follow the project end-to-end:
-
-1. **BaoCao_phu_Nhom_10.pdf** — How the dataset was built.
-2. **Synthetic_data_generation.ipynb** — Python code for data generation.
-3. **BaoCao_Nhom_10.pdf** — Main analytical report.
-4. **Income Spending and Saving Overview.twbx** — Population-level dashboard.
-5. **Actual Spending Behavior Analysis.twbx** — Individual-level dashboard.
-
-```text
-pf-visualization/
-├── Reports/         ← PDF reports
-├── Notebooks/       ← Python notebooks
-├── Dashboards/      ← Tableau files (.twbx)
-└── Data/            ← CSV data files
-```
+This Tableau dashboard is designed for the **Product Managers and Growth Team**, helping them uncover which demographics are struggling financially and *why*, so they can build better intervention features.
 
 ---
 
-## What did I learn?
+## How we simulated the data
 
-- **Synthetic data generation:** How to use Python (Pandas, NumPy) to create realistic fake data with proper statistical distributions — useful when real data isn't available.
-- **Tableau:** Built two interactive dashboards from scratch — KPI cards, filters, trend charts.
-- **Segmented analysis:** How to read numbers by demographic groups (age, occupation, city tier) to find meaningful patterns, not just averages.
-- **Data storytelling:** Turning a CSV into a clear narrative with actionable conclusions.
+Generating random numbers for spending categories independently would ignore real-world relationships (e.g., someone with high housing costs usually has different transport habits). To make the dataset as close to reality as possible, the data was simulated using a **multivariate normal distribution** to preserve category correlation.
+
+1. **Base Demographics:** We started with a cleaned CSV of ~20,000 synthetic individuals based on initial survey profiles.
+2. **Correlation Matrix:** We took reference data from the U.S. Bureau of Labor Statistics ([bls.gov](https://www.bls.gov/cex/tables.htm)), processed it, and computed the exact correlation matrix of spending habits across different age groups.
+3. **Simulation:** A custom Python function applied this correlation matrix via log-normal and multivariate normal distributions to generate realistic, correlated spending vectors for each person.
+
+*Reference:*
+- **BaoCao_phu_Nhom_10.pdf** — Detailed explanation of the simulation mathematics.
+- **Synthetic_data_generation.ipynb** — Python code for data generation.
 
 ---
 
-## Key findings from the data
+## Key findings & Business Value
 
-After running computational analysis (`analyze_pf.py`) on 20,000 rows:
+After running the computational analysis on our 20,000 synthetic users, we found critical insights for the Product Team:
 
-| Age Group | Avg. Savings Rate | What this means |
+| Age Group | Avg. Savings Rate | Financial Reality |
 |-----------|------------------|-----------------|
 | 18–25 | **–26.9%** | Spending more than they earn |
 | 26–35 | +15.6% | Recovering — building stability |
-| 36–45 | **+28.7%** | Best savers in the dataset |
+| 36–45 | **+28.7%** | Best savers |
 | 46–55 | +1.9% | Near-zero — likely peak family expenses |
 | 56–65 | –86.6% | Drawing down savings (likely retired) |
 
-**Surprising finding:** Non-essential spending (dining out, entertainment, misc.) is only **~8%** of total spend — a much smaller share than expected.
+**The crucial insight for the PFM feature:** 
+Non-essential spending (dining out, entertainment, misc.) is only **~8%** of total spend across the board. 
 
-> **The real insight:** Young people (18–25) overspend not because of leisure, but because **fixed costs (rent, insurance, transport) already consume most of their income** before discretionary spending even begins.
+> **Why this matters for the app:** Young users (18–25) aren't overspending because they buy too much coffee or entertainment. They go negative because **fixed costs (rent, insurance, transport) consume their income almost immediately**. A traditional budgeting app that only says "You spent too much on Dining" is useless to them.
 
 ---
 
-## Proposed improvement
+## Proposed Feature & A/B Test
 
-Based on the data, here's a simple experiment I'd suggest to help users manage money better:
+Based on the macro findings, here is the recommendation for the **PFM Product Team**:
 
-### A/B Test: Proactive spending alerts
+### A/B Test: Proactive Fixed-Cost Alerts
 
-**The problem:** The 18–25 group is overspending (–26.9%), but the current dashboard only shows what happened after the month is over — too late to change behavior.
+**The problem:** The current standard in banking apps is to show users a pie chart at the end of the month (reactive). For our 18-25 demographic, their money is already gone to fixed costs early in the month.
 
-**The idea:**
+**The proposed feature:** A proactive notification engine that warns users *before* they overspend their remaining disposable income, factoring in their heavy fixed costs.
 
-| | Group A (current) | Group B (test) |
+| | Group A (Control) | Group B (Test) |
 |---|---|---|
-| Experience | Review spending at end of month | Get an alert before going over budget |
-| Example | "You spent $2,000 this month" | "⚠️ You've used 90% of your income with 10 days left" |
+| Experience | Standard end-of-month spending summary | Proactive mid-month pacing alerts |
+| Example | "You spent $2,000 this month." | "Rent just cleared. You only have $300 left for the next 15 days. Slow down!" |
 
-**What I'd measure:** After 1 month, does Group B save more than Group A?
-
-**Why this approach makes sense:**
-The problem isn't lack of information — users know they're overspending. The problem is they find out **too late**. Switching from reactive reporting to proactive nudging addresses the actual root cause.
+**Hypothesis:** By shifting from a reactive "auto-categorization" feature (which users rarely review) to a proactive pacing alert, Group B will end the month with a higher average savings rate than Group A. This directly bridges the gap between macro-level insights and a micro-level product feature.
 
 ---
 
@@ -91,31 +78,21 @@ The problem isn't lack of information — users know they're overspending. The p
 
 | Tool | Purpose |
 |------|---------|
-| Python (Pandas, NumPy) | Data generation and cleaning |
-| Tableau | Dashboard design, KPI visualization |
-| Excel / Google Sheets | Data validation |
-
----
-
-## What's next?
-
-- **Real data integration:** Replace synthetic data with actual bank or e-wallet exports.
-- **Spending forecasting:** Use a simple model to predict end-of-month balance based on current spending pace.
-- **Automation:** Turn the manual notebook workflow into a scheduled pipeline that updates the dashboard automatically.
+| Python (Pandas, NumPy, SciPy) | Advanced statistical data simulation and cleaning |
+| Tableau | Macro-level Dashboard design for Product stakeholders |
+| Data Source | U.S. Bureau of Labor Statistics (BLS) |
 
 ---
 
 ## How to run the project
 
 ### Clone the repo
-
 ```bash
 git clone https://github.com/hoangf384/pf-visualization.git
 cd pf-visualization
 ```
 
 ### Set up the environment
-
 ```bash
 # Create a virtual environment
 python -m venv .venv
@@ -132,14 +109,11 @@ pip install -r requirements.txt
 python -m ipykernel install --user --name=.venv --display-name "Python (.venv)"
 ```
 
-Then open any `.ipynb` file in Jupyter and select the **Python (.venv)** kernel.
-
 ---
 
-## Screenshots
+## Dashboard
+
+**Income Spending and Saving Overview.twbx** — Macro-level dashboard visualizing demographic behaviors for the Product Team.
 
 ![Dashboard Overview](Images/demographic.png)
 [→ View General Dashboard on Tableau Public](https://public.tableau.com/app/profile/nguy.n.phan.ho.ng.ph.c/viz/Book1_17516920190310/General?publish=yes)
-
-![Spending Behavior](Images/Behaviors.png)
-[→ View Spending Behavior Dashboard on Tableau Public](https://public.tableau.com/app/profile/nguyen.nhi8170/viz/CuoiKy_17519870918010/Dashboard1?publish=yes)
