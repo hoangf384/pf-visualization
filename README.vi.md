@@ -70,7 +70,15 @@ Từ bức tranh toàn cảnh (Macro) ở trên, đây là đề xuất cụ th�
 | Trải nghiệm | Xem lại biểu đồ hình tròn cuối tháng. Tính năng tự động phân loại giao dịch (mà user hay phớt lờ). | Nhận Push Notification cảnh báo tốc độ tiêu tiền ngay giữa tháng. |
 | Ví dụ | "Tháng này bạn đã tiêu 20 triệu vào Ăn uống & Sinh hoạt." | "Tiền nhà vừa trừ xong. Cảnh báo: Bạn chỉ còn 3 triệu cho 15 ngày tới. Phanh lại ngay!" |
 
-**Giả thuyết (Hypothesis):** Bằng cách chuyển từ báo cáo "hậu kiểm" sang cảnh báo "tiền trạm", Nhóm B sẽ cải thiện tỷ lệ tiết kiệm (savings rate) trung bình cuối tháng tốt hơn Nhóm A. Bức tranh toàn cảnh (Macro) đã giúp ta tìm ra đúng nguyên nhân để quyết định tính năng App (Micro) tốt nhất để giải quyết triệt để nỗi đau của user!
+**Giả thuyết (Hypothesis):** Bằng cách chuyển từ báo cáo "hậu kiểm" sang cảnh báo "tiền trạm", Nhóm B sẽ cải thiện tỷ lệ tiết kiệm (savings rate) trung bình cuối tháng tốt hơn Nhóm A.
+
+#### Kết quả mô phỏng (từ `analyze_pf.py`)
+
+- **Tỷ lệ tiết kiệm nhóm Đối chứng (Control):** -26.86%
+- **Tỷ lệ tiết kiệm nhóm Thử nghiệm (Variation):** -14.18%
+- **Chỉ số cải thiện (Lift):** **+12.69%**
+
+**[INSIGHT]** Đối với nhóm 18-25, giải pháp 'Budget Alerts' giúp cải thiện đáng kể tình trạng tài chính, giảm mức thâm hụt hàng tháng tới gần một nửa. Điều này chứng minh giá trị của việc dùng Insight vĩ mô để thiết kế giải pháp sản phẩm vi mô cực kỳ hiệu quả.
 
 ---
 

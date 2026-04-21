@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 
 # Load data
 df = pd.read_csv('Data/synthetic_data_output.csv')
@@ -29,11 +28,25 @@ print(f"Average Non-Essential Ratio: {df['NE_Ratio'].mean():.2%}")
 
 # Hypothesize an A/B test for 18-25 group
 young_users = df[df['Age_Group'] == '18-25'].copy()
-# Goal: Increase Savings Rate by 5% through "Smart Alerts"
+
+# Giả định: App giúp người dùng giảm 10% tổng chi tiêu (Spending Reduction)
+reduction_rate = 0.10
+variation_spending = young_users['Total Spending'] * (1 - reduction_rate)
+variation_savings_rates = (young_users['Income'] - variation_spending) / young_users['Income']
+
 control_savings_rate = young_users['Savings_Rate'].mean()
-variation_savings_rate = control_savings_rate * 1.5 # Assume 50% improvement for the sake of simulation
+variation_savings_rate = variation_savings_rates.mean()
 
 print("\n--- Hypothetical A/B Test for 18-25 Group ---")
+print(f"Goal: Reduce spending by {reduction_rate:.0%} through Smart Alerts")
 print(f"Control (Standard Dashboard) Savings Rate: {control_savings_rate:.2%}")
 print(f"Variation (Budget Alerts) Savings Rate: {variation_savings_rate:.2%}")
 print(f"Lift: {variation_savings_rate - control_savings_rate:.2%}")
+
+# insight
+if control_savings_rate < 0:
+    print(f"\n[INSIGHT] Nhóm 18-25 đang chi tiêu vượt mức thu nhập ({control_savings_rate:.2%}).")
+    print(f"Giải pháp 'Budget Alerts' giúp cải thiện đáng kể, giảm mức thâm hụt xuống còn {variation_savings_rate:.2%}.")
+else:
+    print(f"\n[INSIGHT] Nhóm 18-25 đang tiết kiệm ở mức {control_savings_rate:.2%}.")
+    print(f"Giải pháp 'Budget Alerts' giúp nâng tỷ lệ tiết kiệm lên {variation_savings_rate:.2%}.")

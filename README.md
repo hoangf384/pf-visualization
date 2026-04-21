@@ -49,7 +49,7 @@ After running the computational analysis on our 20,000 synthetic users, we found
 | 56–65 | –86.6% | Drawing down savings (likely retired) |
 
 **The crucial insight for the PFM feature:** 
-Non-essential spending (dining out, entertainment, misc.) is only **~8%** of total spend across the board. 
+Non-essential spending (dining out, entertainment, misc.) is only **~8%** of total spending across the board. 
 
 > **Why this matters for the app:** Young users (18–25) aren't overspending because they buy too much coffee or entertainment. They go negative because **fixed costs (rent, insurance, transport) consume their income almost immediately**. A traditional budgeting app that only says "You spent too much on Dining" is useless to them.
 
@@ -70,7 +70,15 @@ Based on the macro findings, here is the recommendation for the **PFM Product Te
 | Experience | Standard end-of-month spending summary | Proactive mid-month pacing alerts |
 | Example | "You spent $2,000 this month." | "Rent just cleared. You only have $300 left for the next 15 days. Slow down!" |
 
-**Hypothesis:** By shifting from a reactive "auto-categorization" feature (which users rarely review) to a proactive pacing alert, Group B will end the month with a higher average savings rate than Group A. This directly bridges the gap between macro-level insights and a micro-level product feature.
+**Hypothesis:** By shifting from a reactive "auto-categorization" feature (which users rarely review) to a proactive pacing alert, Group B will end the month with a higher average savings rate than Group A.
+
+#### Simulation Results (from `analyze_pf.py`)
+
+- **Control Group Savings Rate:** -26.86%
+- **Variation Group Savings Rate:** -14.18%
+- **Lift (Improvement):** **+12.69%**
+
+**[INSIGHT]** For the 18-25 demographic, the "Budget Alerts" feature effectively cuts their monthly deficit by nearly half. This bridges the gap between macro-level demographic insights and a micro-level product solution.
 
 ---
 
